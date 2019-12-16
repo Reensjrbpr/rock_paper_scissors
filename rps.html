@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Let's play Rock, Paper, Scissors!</title>
+    </head>
+    <body>
+        <script>
+                          
+            let playerScore = 0;
+            let computerScore = 0;
+            let round = 1;
+            
+            function computerPlay() {
+                let compResult = Math.floor(Math.random() * 3);
+                let compPlay = "";
+
+                switch(compResult){
+                    case 0:
+                        return compPlay = "rock";
+                        break;
+                    case 1:
+                        return compPlay = "paper";
+                        break;
+                    case 2:
+                        return compPlay = "scissors";
+                        break;
+                    default:
+                        break;
+                } 
+            }
+
+            function playRound(playerSelection, computerSelection) {
+
+                if(playerSelection === computerSelection){
+                    return "DRAW! Try again." + countWinner(playerScore, computerScore, round++);
+                }
+                else if(playerSelection === "rock" && computerSelection === "scissors"){
+                    return "Congrats! You won the round!" + countWinner(++playerScore, computerScore, round++);
+                }
+                else if(playerSelection === "scissors" && computerSelection === "paper"){
+                    return "Congrats! You won the round!" + countWinner(++playerScore, computerScore, round++);
+                }
+                else if(playerSelection === "paper" && computerSelection === "rock"){
+                    return "Congrats! You won the round!" + countWinner(++playerScore, computerScore, round++);
+                }
+                else{
+                    return "You lose! Try again." + countWinner(playerScore, ++computerScore, round++);
+                }
+
+            }
+
+            function game() {
+                let i;
+
+                for(i= 1; i < 6; i++) {
+
+                    let computerSelection = computerPlay();
+                    let playerSelection = prompt("Let's play Rock, Paper, Scissors!!\n\n\nEnter 'rock, paper, or scissors':");
+
+                    playerSelection = playerSelection.toLowerCase();
+
+                    alert(playRound(playerSelection, computerSelection));
+                }
+
+                let result = (playerScore > computerScore) ? playerWin() : compWin();
+            }
+
+            function countWinner(playerScore, computerScore, round) {
+                return "\n\nRound #" + round + "\n\nPlayer Score: " + playerScore + " | Computer Score: " + computerScore + "\n\n";             
+            }
+
+            function playerWin(){
+                alert("You are the all time Rock, Paper, Scissors champion!!");
+            }
+
+            function compWin(){
+                alert("Bow down to your AI overlord!!");
+            }
+
+            game();
+        </script>
+    </body>
+</html>
